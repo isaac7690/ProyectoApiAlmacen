@@ -17,7 +17,7 @@ GO
 --=============================================================--
                      --SP PARA LOS COMBOBOX
 --=============================================================--
---sp_GetMarca(ok)
+--sp_GetMarca(OK)
 CREATE OR ALTER PROCEDURE sp_GetMarca
 AS
 BEGIN
@@ -26,7 +26,7 @@ BEGIN
 END
 GO
 
---sp_GetCategoriaProducto(ok)
+--sp_GetCategoriaProducto(OK)
 CREATE OR ALTER PROCEDURE sp_GetCategoriaProducto
 AS
 BEGIN
@@ -35,7 +35,7 @@ BEGIN
 END
 GO
 
---sp_GetCargo
+--sp_GetCargo(OK)
 CREATE OR ALTER PROCEDURE sp_GetCargo
 AS
 BEGIN
@@ -64,7 +64,7 @@ GO
 --=============================================================--
              --SP para los listados y CRUD por Entidad
 --=============================================================--
------------------------TABLA PRODUCTO-----------------------------
+-----------------------TABLA PRODUCTO-----------------------------OK
 --==============================================================--
 
 --LISTA DE PRODUCTOS
@@ -136,7 +136,6 @@ BEGIN
 END
 GO
 
-
 --------------------------------TABLA GUIA_RECEPCION----------------------------------
 --==================================================================================--
 
@@ -204,22 +203,123 @@ GO
 
 --------------------------------TABLA PROVEEDOR--------------------------------
 --===========================================================================--
---LISTA DE PROVEEDORES
+--LISTA DE PROVEEDORES--
 CREATE OR ALTER PROCEDURE sp_listar_provedores
 AS
 BEGIN
 	SELECT P.idProveedor, P.rucProveedor, P.razonSocialProveedor,P.telefono
-	FROM PROVEEDOR P  
-	INNER JOIN PROVEEDOR P ON P.idProveedor = GR.idProveedor
-	INNER JOIN EMPLEADO E ON E.idEmpleado = GR.idEmpleado
+	FROM PROVEEDOR P
 END
 GO
-EXEC sp_listarGuiasRecepcion
+EXEC sp_listar_provedores
 GO
 
+--AGREGAR PROVEEDOR--
+CREATE OR ALTER PROCEDURE sp_insert_proveedores
+	@rucProveedor VARCHAR(15),
+	@razonSocialProveedor VARCHAR(45),
+	@telefono VARCHAR(45)
+AS
+BEGIN
+	INSERT INTO PROVEEDOR(rucProveedor,razonSocialProveedor,telefono)
+	VALUES (@rucProveedor, @razonSocialProveedor, @telefono)
+END
+GO
 
+--EDITAR PROVEEDOR
+CREATE OR ALTER PROCEDURE sp_update_proveedor
+	@idProveedor INT,
+	@rucProveedor VARCHAR(15),
+	@razonSocialProveedor VARCHAR(45),
+	@telefono VARCHAR(45)
+AS
+BEGIN
+	UPDATE PROVEEDOR SET	
+	rucProveedor = @rucProveedor,
+	razonSocialProveedor = @razonSocialProveedor,
+	telefono = @telefono
+WHERE idProveedor = @idProveedor
+END
+GO
 
+--BUSCAR PROVEEDOR POR ID--
+CREATE OR ALTER PROCEDURE sp_buscar_proveedor
+	@idProveedor INT
+AS
+BEGIN
+	SELECT*FROM PROVEEDOR WHERE idProveedor = @idProveedor
+END
+GO
 
+--ELIMINAR PROVEEDOR--
+CREATE OR ALTER PROCEDURE sp_eliminar_proveedor
+	@idProveedor INT
+AS
+BEGIN
+	DELETE FROM PROVEEDOR WHERE idProveedor = @idProveedor
+END
+GO
+
+----------------------------------TABLA EMPLEADO --------------------------------
+--===========================================================================--
+--LISTAR EMPLEADOS
+CREATE OR ALTER PROCEDURE sp_listar_empleados
+AS
+BEGIN
+	SELECT E.idEmpleado, E.nomEmpleado, C.idCargo, C.nomCargo, E.dniEmpleado
+	FROM EMPLEADO E  
+	INNER JOIN CARGO C ON C.idCargo = E.idCargo
+END
+GO
+EXEC sp_listar_empleados
+GO
+
+--AGREGAR EMPLEADO
+CREATE OR ALTER PROCEDURE sp_insert_empleado
+	@nomEmpleado VARCHAR(15),
+	@idCargo INT,
+	@dniEmpleado VARCHAR(45)
+AS
+BEGIN
+	INSERT INTO EMPLEADO(nomEmpleado,idCargo,dniEmpleado)
+	VALUES (@nomEmpleado, @idCargo, @dniEmpleado)
+END
+GO
+
+--ACTUALIZAR EMPLEADO
+CREATE OR ALTER PROCEDURE sp_update_empleado
+	@idEmpleado INT,
+	@nomEmpleado VARCHAR(45),
+	@idCargo INT,
+	@dniEmpleado VARCHAR(45)
+AS
+BEGIN
+	UPDATE EMPLEADO
+	SET
+		nomEmpleado = @nomEmpleado,
+		idCargo = @idCargo,
+		dniEmpleado = @dniEmpleado
+	WHERE idEmpleado = @idEmpleado
+END
+GO
+
+--BUSCAR EMPLEADO POR ID
+CREATE OR ALTER PROCEDURE sp_buscar_empleado
+	@idEmpleado INT
+AS
+BEGIN
+	SELECT*FROM EMPLEADO WHERE idEmpleado = @idEmpleado
+END
+GO
+
+--ELIMINAR EMPLEADO
+CREATE OR ALTER PROCEDURE sp_eliminar_empleado
+	@idEmpleado INT
+AS
+BEGIN
+	DELETE FROM EMPLEADO WHERE idEmpleado = @idEmpleado
+END
+GO
 
 
 ----------------------------------TABLA USUARIO--------------------------------
@@ -249,7 +349,6 @@ GO
 --END
 --GO
 
-
 ----ACTUALIZAR USUARIO
 --CREATE OR ALTER PROCEDURE sp_UpdateUsuario
 --	@prmIdUsuario INT,
@@ -273,57 +372,5 @@ GO
 --AS
 --BEGIN
 --	DELETE FROM USUARIO WHERE idUsuario = @prmIdUsuario
---END
---GO
-----------------------------TABLA EMPLEADO--------------------------------------
---============================================================================--
-
-----LISTA DE EMPLEADOS
---CREATE OR ALTER PROCEDURE sp_listaEmpleados
---AS
---BEGIN
---	SELECT E.idEmpleado, E.nomEmpleado, C.idCargo, C.nomCargo, E.dniEmpleado
---	FROM EMPLEADO E
---	INNER JOIN CARGO C ON C.idCargo = E.idCargo
---END
---GO
---EXEC sp_listaEmpleados
---GO
-
-----AGREGAR EMPLEADO
---CREATE OR ALTER PROCEDURE sp_insertEmpleado
---	@prmNomEmpleado VARCHAR(45),
---	@prmIdCargo INT,
---	@prmDniEmpleado VARCHAR(45)
---AS
---BEGIN
---	INSERT INTO EMPLEADO(nomEmpleado, idCargo, dniEmpleado)
---	VALUES (@prmNomEmpleado, @prmIdCargo, @prmDniEmpleado )
---END
---GO
-
-----EDITAR EMPLEADO
---CREATE OR ALTER PROCEDURE sp_UpdateEmpleado
---	@prmIdEmpleado INT,
---	@prmNomEmpleado VARCHAR(45),
---	@prmIdCargo INT,
---	@prmDniEmpleado VARCHAR(45)
---AS
---BEGIN
---	UPDATE EMPLEADO
---	SET
---		nomEmpleado = @prmNomEmpleado,
---		idCargo = @prmIdCargo,
---		dniEmpleado = @prmDniEmpleado
---	WHERE idEmpleado = @prmIdEmpleado
---END
---GO
-
-----ELIMINAR EMPLEADO
---CREATE OR ALTER PROCEDURE sp_EliminarEmpleado
---	@prmIdEmpleado INT
---AS
---BEGIN
---	DELETE FROM EMPLEADO WHERE idEmpleado = @prmIdEmpleado
 --END
 --GO
