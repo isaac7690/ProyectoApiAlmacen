@@ -123,7 +123,7 @@ namespace ProyectoAPICiclo5.DAO
             {
                 try
                 {
-                    SqlCommand command = new SqlCommand("", connection);
+                    SqlCommand command = new SqlCommand("sp_EliminarProducto", connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@prmIdCliente", id);
                     connection.Open();
