@@ -262,6 +262,15 @@ GO
 
 ----------------------------------TABLA EMPLEADO --------------------------------
 --===========================================================================--
+--GET EMPLEADOS PARA COMBOBOX EN GUIA_RECEPCION
+CREATE OR ALTER PROCEDURE sp_GetEmpleadosCbo
+AS
+BEGIN
+	SELECT idEmpleado, nomEmpleado
+	FROM EMPLEADO
+END
+GO
+
 --LISTAR EMPLEADOS
 CREATE OR ALTER PROCEDURE sp_listar_empleados
 AS
