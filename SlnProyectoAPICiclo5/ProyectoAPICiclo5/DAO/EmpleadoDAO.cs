@@ -12,6 +12,30 @@ namespace ProyectoAPICiclo5.DAO
             cadena = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("connection");
         }
 
+
+        //Get Empleados(para el combo box en guia_recepcion)
+        public IEnumerable<Empleado> GetEmpleadoCbo()
+        {
+            List<Empleado> empleadoCbo = new List<Empleado>();
+            using (SqlConnection connection = new SqlConnection(cadena))
+            {
+                SqlCommand command = new SqlCommand("sp_GetEmpleadosCbo", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                connection.Open();
+                SqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    empleadoCbo.Add(new Empleado()
+                    {
+                        idEmpleado = dr.GetInt32(0),
+                        nomEmpleado = dr.GetString(1)
+                    });
+                }
+            }
+            return empleadoCbo;
+        }
+
+
         //listar Empleados
         public IEnumerable<Empleado> GetEmpleados()
         {

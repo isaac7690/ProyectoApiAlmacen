@@ -49,8 +49,21 @@ namespace ProyectoAPICiclo5.Controllers
             return Ok(mensaje);
         }
 
+        //Get Empleado (para el combo box a la hora de insertar o actualizar guías
+        [HttpGet("CategoriaProducto")]
+        public async Task<ActionResult<List<CategoriaProducto>>> GetCategoriaProducto()
+        {
+            var lista = await Task.Run(() => (new CategoriaProductoDAO()).GetCategoriaProducto());
+            return Ok(lista);
+        }
 
-
+        //lista de empleados(para el combo box al registrar y update)
+        [HttpGet("GetEmpleadoCbo")]
+        public async Task<ActionResult<List<Empleado>>> GetEmpleadoCbo()
+        {
+            var lista = await Task.Run(() => (new EmpleadoDAO()).GetEmpleadoCbo());
+            return Ok(lista);
+        }
 
 
 
