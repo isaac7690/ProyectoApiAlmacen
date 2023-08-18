@@ -41,12 +41,30 @@ namespace ProyectoAPICiclo5.Controllers
             return Ok(producto);
         }
 
+        //Eliminar producto
         [HttpDelete("EliminarProducto")]
         public async Task<ActionResult<String>> EliminarProducto(int id)
         {
             var mensaje = await Task.Run(() => (new ProductoDAO()).EliminarProducto(id));
             return Ok(mensaje);
         }
+
+        //get Marcas (para el combobox)
+        [HttpGet("GetMarcas")]
+        public async Task<ActionResult<List<Marca>>> GetMarcas()
+        {
+            var lista = await Task.Run(() => (new MarcaDAO()).GetMarcas());
+            return Ok(lista);
+        }
+
+        //get CategoriaProductos (para el combobox)
+        [HttpGet("CategoriaProducto")]
+        public async Task<ActionResult<List<CategoriaProducto>>> GetCategoriaProducto()
+        {
+            var lista = await Task.Run(() => (new CategoriaProductoDAO()).GetCategoriaProducto());
+            return Ok(lista);
+        }
+
 
     }
 }
