@@ -11,6 +11,7 @@ namespace ProyectoAPICiclo5.DAO
         {
             cadena = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("connection");
         }
+
         //obtener lista de guias(?)
         public IEnumerable<GuiaRecepcion> GetGuiasRecepcion()
         {
