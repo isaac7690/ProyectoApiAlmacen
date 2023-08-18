@@ -29,7 +29,7 @@ namespace ProyectoAPICiclo5.DAO
                         idProveedor = dr.GetInt32(1),
                         fechaLlegada = dr.GetString(2),
                         numGuia = dr.GetString(3),
-                        idEmpleado = dr.GetInt32(4),
+                        idEmpleado = dr.GetInt32(4)
                     });
                 }
             }
