@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoAPICiclo5", "ProyectoAPICiclo5\ProyectoAPICiclo5.csproj", "{8CBF3172-C635-4628-B2F1-F5758554B7F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CBF3172-C635-4628-B2F1-F5758554B7F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBF3172-C635-4628-B2F1-F5758554B7F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CBF3172-C635-4628-B2F1-F5758554B7F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CBF3172-C635-4628-B2F1-F5758554B7F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5449E369-C4B9-4387-9AA8-2848D19BBCB8}
+	EndGlobalSection
+EndGlobal
